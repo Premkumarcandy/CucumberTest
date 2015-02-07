@@ -3,14 +3,14 @@ package com.hascode.tutorial.cucumber.salary;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class SalaryManager {
-	private Map<Integer, Employee> employees = new HashMap<>();
+	private final Map<Integer, Employee> employees = new HashMap<>();
 
 	public SalaryManager(final List<Employee> employees) {
-		this.employees = employees.stream().collect(Collectors.toMap(Employee::getId, Function.<Employee> identity()));
+		for (Employee employee : employees) {
+			this.employees.put(employee.getId(), employee);
+		}
 	}
 
 	public void increaseSalary(final Integer id, final int increaseInPercent) {
